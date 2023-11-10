@@ -1,0 +1,160 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DEV_DATABASE_URL")
+}
+
+enum UserType {
+  staff
+  agent
+  client
+}
+
+model Department {
+  id                       String    @id @default(uuid())
+  name                     String    @db.VarChar(255)
+  superAdmin               Boolean   @default(false)
+  STAFF_VIEW               Boolean   @default(false)
+  STAFF_CREATE             Boolean   @default(false)
+  STAFF_UPDATE             Boolean   @default(false)
+  STAFF_DELETE             Boolean   @default(false)
+  DEPARTMENT_VIEW          Boolean   @default(false)
+  DEPARTMENT_CREATE        Boolean   @default(false)
+  DEPARTMENT_UPDATE        Boolean   @default(false)
+  DEPARTMENT_DELETE        Boolean   @default(false)
+  CLIENT_MASTER_LISTING    Boolean   @default(false)
+  CLIENT_CREATE            Boolean   @default(false)
+  CLIENT_UPDATE            Boolean   @default(false)
+  CLIENT_DELETE            Boolean   @default(false)
+  CLIENT_CREDENTIAL        Boolean   @default(false)
+  AGENT_MASTER_LISTING     Boolean   @default(false)
+  AGENT_CREATE             Boolean   @default(false)
+  AGENT_UPDATE             Boolean   @default(false)
+  AGENT_DELETE             Boolean   @default(false)
+  MARKETING_VIEW           Boolean   @default(false)
+  MARKETING_CREATE         Boolean   @default(false)
+  MARKETING_UPDATE         Boolean   @default(false)
+  MARKETING_DELETE         Boolean   @default(false)
+  CASE_MASTER_LISTING      Boolean   @default(false)
+  CASE_CREATE              Boolean   @default(false)
+  CASE_UPDATE              Boolean   @default(false)
+  CASE_DELETE              Boolean   @default(false)
+  JOB_VIEW                 Boolean   @default(false)
+  JOB_CREATE               Boolean   @default(false)
+  JOB_UPDATE               Boolean   @default(false)
+  JOB_DELETE               Boolean   @default(false)
+  JOB_AMOUNT               Boolean   @default(false)
+  TASK_VIEW                Boolean   @default(false)
+  TASK_CREATE              Boolean   @default(false)
+  TASK_UPDATE              Boolean   @default(false)
+  TASK_DELETE              Boolean   @default(false)
+  ACTIVITY_VIEW            Boolean   @default(false)
+  ACTIVITY_CREATE          Boolean   @default(false)
+  ACTIVITY_UPDATE          Boolean   @default(false)
+  ACTIVITY_DELETE          Boolean   @default(false)
+  CONTRACT_VIEW            Boolean   @default(false)
+  CONTRACT_CREATE          Boolean   @default(false)
+  CONTRACT_UPDATE          Boolean   @default(false)
+  CONTRACT_DELETE          Boolean   @default(false)
+  COSTING_VIEW             Boolean   @default(false)
+  COSTING_CREATE           Boolean   @default(false)
+  COSTING_UPDATE           Boolean   @default(false)
+  COSTING_DELETE           Boolean   @default(false)
+  INCENTIVE_VIEW           Boolean   @default(false)
+  INCENTIVE_CREATE         Boolean   @default(false)
+  INCENTIVE_UPDATE         Boolean   @default(false)
+  INCENTIVE_DELETE         Boolean   @default(false)
+  PAYMENT_VIEW             Boolean   @default(false)
+  PAYMENT_CREATE           Boolean   @default(false)
+  PAYMENT_UPDATE           Boolean   @default(false)
+  PAYMENT_DELETE           Boolean   @default(false)
+  ALARM_MASTER_LISTING     Boolean   @default(false)
+  ALARM_CREATE             Boolean   @default(false)
+  ALARM_UPDATE             Boolean   @default(false)
+  ALARM_DELETE             Boolean   @default(false)
+  CASE_ALARM_VIEW          Boolean   @default(false)
+  CASE_ALARM_CREATE        Boolean   @default(false)
+  CASE_ALARM_UPDATE        Boolean   @default(false)
+  CASE_ALARM_DELETE        Boolean   @default(false)
+  DOCUMENT_VIEW            Boolean   @default(false)
+  DOCUMENT_CREATE          Boolean   @default(false)
+  DOCUMENT_UPDATE          Boolean   @default(false)
+  DOCUMENT_DELETE          Boolean   @default(false)
+  PERSON_INVOLVE_VIEW      Boolean   @default(false)
+  PERSON_INVOLVE_CREATE    Boolean   @default(false)
+  PERSON_INVOLVE_DELETE    Boolean   @default(false)
+  QUOTATION_MASTER_LISTING Boolean   @default(false)
+  QUOTATION_CREATE         Boolean   @default(false)
+  QUOTATION_UPDATE         Boolean   @default(false)
+  QUOTATION_DELETE         Boolean   @default(false)
+  CASE_STATUS_OPEN         Boolean   @default(false)
+  CASE_STATUS_CLOSE        Boolean   @default(false)
+  CASE_STATUS_COMPLETE     Boolean   @default(false)
+  TEMPLATE_VIEW            Boolean   @default(false)
+  TEMPLATE_CREATE          Boolean   @default(false)
+  TEMPLATE_UPDATE          Boolean   @default(false)
+  TEMPLATE_DELETE          Boolean   @default(false)
+  WORK                     Boolean   @default(false)
+  JURISDICTION             Boolean   @default(false)
+  JOB                      Boolean   @default(false)
+  CLASS                    Boolean   @default(false)
+  TASK_STATUS              Boolean   @default(false)
+  EFORM                    Boolean   @default(false)
+  ACTIVITY_LOG             Boolean   @default(false)
+  MEDIA                    Boolean   @default(false)
+  SITE_SETTING             Boolean   @default(false)
+  REPORT                   Boolean   @default(false)
+  createdAt                DateTime  @default(now())
+  updatedAt                DateTime  @updatedAt
+  deletedAt                DateTime? @db.Timestamptz(6)
+  staffs                   Staff[]
+}
+
+model Staff {
+  id                  String    @id @default(uuid())
+  staffId             Int       @unique @default(autoincrement())
+  chineseName         String?   @db.VarChar(255)
+  englishName         String    @db.VarChar(255)
+  nickname            String    @db.VarChar(255)
+  dateOfBirth         DateTime  @db.Timestamptz(6)
+  nationality         String    @db.VarChar(255)
+  documentNumber      String    @db.VarChar(255)
+  dateOfJoin          DateTime  @db.Timestamptz(6)
+  position            String    @db.VarChar(255)
+  directLine          String?   @db.VarChar(255)
+  mobile1             String    @db.VarChar(255)
+  mobile2             String?   @db.VarChar(255)
+  email               String    @db.VarChar(255)
+  address             String    @db.VarChar(255)
+  remarks             String?   @db.VarChar(255)
+  username            String    @db.VarChar(255)
+  password            String?   @db.VarChar(255)
+  lastActive          DateTime  @db.Timestamptz(6)
+  active              Boolean   @default(true)
+  token               String?   @db.VarChar(255)
+  tokenExpiredAt      DateTime? @db.Timestamptz(6)
+  resetToken          String?   @db.VarChar(255)
+  resetTokenExpiredAt DateTime? @db.Timestamptz(6)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+  deletedAt           DateTime? @db.Timestamptz(6)
+  departmentId        String
+
+  department Department @relation(fields: [departmentId], references: [id], onDelete: Cascade)
+
+  @@unique([email, deletedAt], map: "staffs_email_deleted_at")
+  @@unique([username, deletedAt], map: "staffs_username_deleted_at")
+}
+
+model Case {
+  id          String    @id @default(uuid())
+  caseId      Int       @unique @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deletedAt   DateTime? @db.Timestamptz(6)
+}
